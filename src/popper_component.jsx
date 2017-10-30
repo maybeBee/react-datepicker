@@ -1,7 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Manager, Target, Popper } from 'react-popper'
 
 export const popperPlacementPositions = [
   'auto',
@@ -42,7 +41,7 @@ export default class PopperComponent extends React.Component {
           boundariesElement: 'viewport'
         }
       },
-      popperPlacement: 'bottom-start'
+      popperPlacement: 'bottom'
     }
   }
 
@@ -51,8 +50,6 @@ export default class PopperComponent extends React.Component {
       className,
       hidePopper,
       popperComponent,
-      popperModifiers,
-      popperPlacement,
       targetComponent
     } = this.props
 
@@ -61,12 +58,10 @@ export default class PopperComponent extends React.Component {
     if (!hidePopper) {
       const classes = classnames('react-datepicker-popper', className)
       popper = (
-        <Popper
-            className={classes}
-            modifiers={popperModifiers}
-            placement={popperPlacement}>
+        <div
+            className={classes}>
           {popperComponent}
-        </Popper>
+        </div>
       )
     }
 
@@ -75,12 +70,12 @@ export default class PopperComponent extends React.Component {
     }
 
     return (
-      <Manager>
-        <Target className="react-datepicker-wrapper">
+      <div>
+        <div className="react-datepicker-wrapper">
           {targetComponent}
-        </Target>
+        </div>
         { popper }
-      </Manager>
+      </div>
     )
   }
 }
